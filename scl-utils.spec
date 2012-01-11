@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20111214
+Version:	20120111
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -41,6 +41,7 @@ rm -rf %buildroot
 %defattr(-,root,root,-)
 %dir /opt/rh
 %dir %{_sysconfdir}/scl/prefixes
+%{_bindir}/dsc
 %{_bindir}/scl
 %{_bindir}/scl_enabled
 
@@ -49,6 +50,9 @@ rm -rf %buildroot
 %{_sysconfdir}/rpm/macros.dsc
 
 %changelog
+* Wed Jan 11 2012 Jindrich Novy <jnovy@redhat.com> 20120111-1
+- add "dsc" alias to "scl" utility
+
 * Wed Dec 14 2011 Jindrich Novy <jnovy@redhat.com> 20111214-1
 - initial review fixes (#767556)
 

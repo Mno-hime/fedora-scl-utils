@@ -15,9 +15,11 @@ all: $(NAME)
 
 $(NAME): $(SOURCES) $(OBJECTS) $(OTHERFILES)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) $(WARNINGS) -o scl
+	rm -f dsc
+	ln -s scl dsc
 
 clean:
-	rm -f *.o scl
+	rm -f *.o scl dsc
 
 distclean: clean
 	rm -f *~
@@ -35,8 +37,9 @@ install: $(NAME)
 	mkdir -p $(DESTDIR)/$(CNFDIR)/rpm
 	cp macros.dsc $(DESTDIR)/$(CNFDIR)/rpm
 	cp scl $(DESTDIR)/$(BINDIR)
+	cp -d dsc $(DESTDIR)/$(BINDIR)
 	cp scl_enabled $(DESTDIR)/$(BINDIR)
 
 uninstall:
-	rm -f $(BINDIR)/$(NAME)
+	rm -f $(BINDIR)/$(NAME) $(BINDIR)/dsc
 	rm -f $(CNFDIR)/rpm/macros.dsc
