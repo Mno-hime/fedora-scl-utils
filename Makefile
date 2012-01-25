@@ -35,9 +35,8 @@ install: $(NAME)
 	mkdir -p $(DESTDIR)/$(CNFDIR)/rpm
 	cp macros.scl $(DESTDIR)/$(CNFDIR)/rpm
 	cp scl $(DESTDIR)/$(BINDIR)
-	cp -d scl $(DESTDIR)/$(BINDIR)
 	cp scl_enabled $(DESTDIR)/$(BINDIR)
 
 uninstall:
-	rm -f $(BINDIR)/$(NAME) $(BINDIR)/scl
+	rm -f $(BINDIR)/scl $(BINDIR)/scl_enabled
 	rm -f $(CNFDIR)/rpm/macros.scl
