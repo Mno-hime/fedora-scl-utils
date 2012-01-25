@@ -1,12 +1,11 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120111
+Version:	20120125
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		http://jnovy.fedorapeople.org/scl-utils/
 Source0:	http://jnovy.fedorapeople.org/scl-utils/%{name}-%{version}.tar.gz
-Provides:	dsc-utils = %version
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -15,7 +14,6 @@ Run-time utility for alternative packaging.
 %package build
 Summary:	RPM build macros for alternative packaging
 Group:		Applications/File
-Provides:	dsc-utils-build = %version
 
 %description build
 Essential RPM build macros for alternative packaging.
@@ -41,15 +39,18 @@ rm -rf %buildroot
 %defattr(-,root,root,-)
 %dir /opt/rh
 %dir %{_sysconfdir}/scl/prefixes
-%{_bindir}/dsc
 %{_bindir}/scl
 %{_bindir}/scl_enabled
 
 %files build
 %defattr(-,root,root,-)
-%{_sysconfdir}/rpm/macros.dsc
+%{_sysconfdir}/rpm/macros.scl
 
 %changelog
+* Wed Jan 25 2012 Jindrich Novy <jnovy@redhat.com> 20120125-1
+- remove dsc macros
+- trigger scl-utils-build BR inclusion while using scl macros
+
 * Wed Jan 11 2012 Jindrich Novy <jnovy@redhat.com> 20120111-1
 - add "dsc" alias to "scl" utility
 

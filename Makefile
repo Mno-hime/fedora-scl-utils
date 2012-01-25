@@ -3,7 +3,7 @@ VERSION=`date +%Y%m%d`
 WARNINGS?=-Wall -Wshadow -Wcast-align -Winline -Wextra -Wmissing-noreturn
 CFLAGS?=-O2
 CFILES=scl.c
-OTHERFILES=Makefile scl_enabled macros.dsc
+OTHERFILES=Makefile scl_enabled macros.scl
 SOURCES=$(CFILES) $(OTHERFILES)
 OBJECTS=scl.o
 
@@ -15,16 +15,14 @@ all: $(NAME)
 
 $(NAME): $(SOURCES) $(OBJECTS) $(OTHERFILES)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) $(WARNINGS) -o scl
-	rm -f dsc
-	ln -s scl dsc
 
 clean:
-	rm -f *.o scl dsc
+	rm -f *.o scl
 
 distclean: clean
 	rm -f *~
 
-dist:
+dist: $(NAME)
 	LANG=C
 	rm -rf $(NAME)-$(VERSION)
 	mkdir $(NAME)-$(VERSION)
@@ -35,11 +33,11 @@ dist:
 install: $(NAME)
 	mkdir -p $(DESTDIR)/$(BINDIR)
 	mkdir -p $(DESTDIR)/$(CNFDIR)/rpm
-	cp macros.dsc $(DESTDIR)/$(CNFDIR)/rpm
+	cp macros.scl $(DESTDIR)/$(CNFDIR)/rpm
 	cp scl $(DESTDIR)/$(BINDIR)
-	cp -d dsc $(DESTDIR)/$(BINDIR)
+	cp -d scl $(DESTDIR)/$(BINDIR)
 	cp scl_enabled $(DESTDIR)/$(BINDIR)
 
 uninstall:
-	rm -f $(BINDIR)/$(NAME) $(BINDIR)/dsc
-	rm -f $(CNFDIR)/rpm/macros.dsc
+	rm -f $(BINDIR)/$(NAME) $(BINDIR)/scl
+	rm -f $(CNFDIR)/rpm/macros.scl
