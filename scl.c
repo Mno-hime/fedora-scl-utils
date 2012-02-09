@@ -58,7 +58,13 @@ int main(int argc, char **argv) {
 	int i, tfd, ffd, stdin_read = 0;
 
 	if (!strcmp(argv[argc-1], "-")) {	/* reading command from stdin */
-		size_t r = 0;
+		size_t r;
+
+		if (argc < 4) {
+			fprintf(stderr, "Need at least 3 arguments.\nRun %s without arguments to get help.\n", argv[0]);
+			exit(EXIT_FAILURE);
+		}
+
 		cmd = malloc(BUFSIZ);
 
 		if (!cmd) {
@@ -66,9 +72,9 @@ int main(int argc, char **argv) {
 			exit(EXIT_FAILURE);
 		}
 
-		for (;(r += fread(cmd+r, 1, BUFSIZ, stdin));) {
+		for (r=0; (r += fread(cmd+r, 1, BUFSIZ, stdin));) {
 			if (feof(stdin)) break;
-			cmd = realloc(cmd, r);
+			cmd = realloc(cmd, r+BUFSIZ);
 			if (!cmd) {
 				fprintf(stderr, "Can't reallocate memory.\n");
 				exit(EXIT_FAILURE);
@@ -92,10 +98,10 @@ int main(int argc, char **argv) {
 
 	tfd = mkstemp(tmp);
 
-	check_asprintf(&enabled, "scl_enabled %s\n[ $? == 0 ] && exit 1\n"
-				 "eval \"SCLS=( ${x_scls[*]} )\"\n"
-				 "SCLS+=(%s)\n"
-				 "export X_SCLS=$(printf '%%q ' \"${SCLS[@]}\")\n", argv[2], argv[2]);
+	check_asprintf(&enabled, "scl_enabled %s\nif [ $? != 0 ]; then\n"
+				 "  eval \"SCLS=( ${x_scls[*]} )\"\n"
+				 "  SCLS+=(%s)\n"
+				 "  export X_SCLS=$(printf '%%q ' \"${SCLS[@]}\")\nfi\n", argv[2], argv[2]);
 	write_script(tfd, enabled);
 	free(enabled);
 
@@ -107,11 +113,13 @@ int main(int argc, char **argv) {
 		check_asprintf(&path, "/etc/scl/prefixes/%s", argv[i]);
 		if (!(f=fopen(path,"r"))) {
 			fprintf(stderr, "Unable to open %s!\n", path);
+			unlink(tmp);
 			exit(EXIT_FAILURE);
 		}
 		r = fread(scl_dir, 1, BUFSIZ, f);
 		if (!r) {
 			fprintf(stderr, "Unable to read or file empty %s!\n", path);
+			unlink(tmp);
 			exit(EXIT_FAILURE);
 		}
 		scl_dir[r-1] = '\0';
@@ -124,10 +132,12 @@ int main(int argc, char **argv) {
 		check_asprintf(&path, "%s", scl_dir);
 		if (lstat(path, &st)) {
 			fprintf(stderr, "%s doesn't exist\n", path);
+			unlink(tmp);
 			exit(EXIT_FAILURE);
 		}
 		if (!S_ISDIR(st.st_mode)) {
 			fprintf(stderr, "%s is not a directory\n", path);
+			unlink(tmp);
 			exit(EXIT_FAILURE);
 		}
 		check_asprintf(&enablepath, "%s/%s", path, argv[1]);
@@ -139,6 +149,7 @@ int main(int argc, char **argv) {
 			write_script(tfd, echo);
 		} else {
 			fprintf(stderr, "WARNING: %s scriptlet does not exist!\n", enablepath);
+			unlink(tmp);
 			exit(EXIT_FAILURE);
 		}
 
@@ -155,6 +166,7 @@ int main(int argc, char **argv) {
 	check_asprintf(&bash_cmd, "/bin/bash %s", tmp);
 	i = system(bash_cmd);
 	free(bash_cmd);
+	unlink(tmp);
 
 	return WEXITSTATUS(i);
 }
