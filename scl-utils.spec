@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120125
+Version:	20120209
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -47,6 +47,13 @@ rm -rf %buildroot
 %{_sysconfdir}/rpm/macros.scl
 
 %changelog
+* Mon Feb 13 2012 Jindrich Novy <jnovy@redhat.com> 20120209-1
+- fix minor bugs (#788194)
+  - clear temp files
+  - handle commands from stdin properly
+  - run command even if ran as "scl enable SCL command" from already
+    enabled SCL
+
 * Wed Jan 25 2012 Jindrich Novy <jnovy@redhat.com> 20120125-1
 - update to 20120125
 
