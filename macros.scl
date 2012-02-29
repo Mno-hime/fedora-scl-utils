@@ -5,10 +5,9 @@
 
 %scl_package() %{expand:%{!?_root_prefix:
 %global pkg_name		%1
-%global scl_short_prefix	scl
-%global scl_name		%{scl_short_prefix}_%{scl}
-%global scl_runtime		%{scl_name}-runtime
-%global scl_prefix		%{scl_name}_
+%global scl_name		%{scl}
+%global scl_prefix		%{scl}-
+%global scl_runtime		%{scl}-runtime
 %{!?_scl_prefix:		%global _scl_prefix /opt/rh}
 %global _scl_scripts		%{_scl_prefix}/%{scl}
 %global _scl_root		%{_scl_prefix}/%{scl}/root
@@ -41,7 +40,7 @@
 %global _mandir			%{_datadir}/man
 %global _docdir			%{_datadir}/doc
 %global _defaultdocdir		%{_docdir}
-%global scl_pkg_name		%{scl_short_prefix}_%{scl}_%{pkg_name}
+%global scl_pkg_name		%{scl}-%{pkg_name}
 BuildRequires: scl-utils-build
 }}
 

@@ -50,12 +50,48 @@ static void write_script( int tfd, char *s ) {
 	}
 }
 
+static void list_collections() {
+	struct stat sb;
+	struct dirent **nl;
+	int n, i;
+        const char prefix[] = "/etc/scl/prefixes/";
+
+	if (stat(prefix, &sb) == -1) {
+		perror("stat");
+		exit(EXIT_FAILURE);
+	}
+
+	if (!S_ISDIR(sb.st_mode)) {
+		fprintf(stderr, "%s is not a directory\n", prefix);
+		exit(EXIT_FAILURE);
+	}
+
+
+	if ((n = scandir(prefix, &nl, 0, alphasort)) < 0) {
+		perror("scandir");
+		exit(EXIT_FAILURE);
+	}
+
+	for (i=0; i<n; i++) {
+		if (*nl[i]->d_name != '.') {
+			printf("%s\n", nl[i]->d_name);
+		}
+	}
+
+	free(nl);
+}
+
 int main(int argc, char **argv) {
 	struct stat st;
 	char *path, *enablepath;
 	char tmp[] = "/var/tmp/sclXXXXXX";
 	char *cmd = NULL, *bash_cmd, *echo, *enabled;
 	int i, tfd, ffd, stdin_read = 0;
+
+	if (argc == 2 && (!strcmp(argv[1],"--list") || !strcmp(argv[1],"-l"))) {
+		list_collections();
+		return 0;
+	}
 
 	if (!strcmp(argv[argc-1], "-")) {	/* reading command from stdin */
 		size_t r;
