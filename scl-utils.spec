@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120209
+Version:	20120229
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -47,6 +47,11 @@ rm -rf %buildroot
 %{_sysconfdir}/rpm/macros.scl
 
 %changelog
+* Wed Feb 29 2012 Jindrich Novy <jnovy@redhat.com> 20120229-1
+- do not prepend scl_* prefix to package names
+- unify package naming to <SCL>-package-version
+- add scl --list functionality to list available SCLs
+
 * Mon Feb 13 2012 Jindrich Novy <jnovy@redhat.com> 20120209-1
 - fix minor bugs (#788194)
   - clear temp files
