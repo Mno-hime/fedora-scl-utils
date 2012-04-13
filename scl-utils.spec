@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120229
+Version:	20120413
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -30,6 +30,7 @@ rm -rf %buildroot
 mkdir -p %buildroot%{_sysconfdir}/rpm
 mkdir -p %buildroot%{_sysconfdir}/scl/prefixes
 mkdir -p %buildroot/opt/rh
+install -d -m 755 %buildroot%{_mandir}/man1
 make install DESTDIR=%buildroot
 
 %clean
@@ -41,12 +42,19 @@ rm -rf %buildroot
 %dir %{_sysconfdir}/scl/prefixes
 %{_bindir}/scl
 %{_bindir}/scl_enabled
+%{_mandir}/man1/*
 
 %files build
 %defattr(-,root,root,-)
 %{_sysconfdir}/rpm/macros.scl
 
 %changelog
+* Fri Apr 13 2012 Jindrich Novy <jnovy@redhat.com> 20120413-1
+- filesystem ownership by meta package
+- add man page
+- fix memory leak when parsing commands from stdin
+- use more descriptive error message if /etc/prefixes is missing
+
 * Wed Feb 29 2012 Jindrich Novy <jnovy@redhat.com> 20120229-1
 - do not prepend scl_* prefix to package names
 - unify package naming to <SCL>-package-version

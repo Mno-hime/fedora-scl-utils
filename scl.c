@@ -57,7 +57,7 @@ static void list_collections() {
         const char prefix[] = "/etc/scl/prefixes/";
 
 	if (stat(prefix, &sb) == -1) {
-		perror("stat");
+		fprintf(stderr, "%s does not exist\n", prefix);
 		exit(EXIT_FAILURE);
 	}
 
@@ -201,6 +201,7 @@ int main(int argc, char **argv) {
 
 	check_asprintf(&bash_cmd, "/bin/bash %s", tmp);
 	i = system(bash_cmd);
+	if (stdin_read) free(cmd);
 	free(bash_cmd);
 	unlink(tmp);
 
