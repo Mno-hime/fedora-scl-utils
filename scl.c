@@ -129,7 +129,7 @@ int main(int argc, char **argv) {
 					"If <command> is '-' then the command will be read from standard input.\n", argv[0]);
 			exit(EXIT_FAILURE);
 		}
-		cmd = argv[argc-1];
+		cmd = strdup(argv[argc-1]);
 	}
 
 	tfd = mkstemp(tmp);
@@ -197,6 +197,7 @@ int main(int argc, char **argv) {
 
 	write_script(tfd, cmd);
 	write_script(tfd, "\n");
+	free(cmd);
 	close(tfd);
 
 	check_asprintf(&bash_cmd, "/bin/bash %s", tmp);

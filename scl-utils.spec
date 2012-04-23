@@ -1,11 +1,12 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120413
+Version:	20120423
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		http://jnovy.fedorapeople.org/scl-utils/
 Source0:	http://jnovy.fedorapeople.org/scl-utils/%{name}-%{version}.tar.gz
+Source1:	macros.scl-filesystem
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -32,6 +33,7 @@ mkdir -p %buildroot%{_sysconfdir}/scl/prefixes
 mkdir -p %buildroot/opt/rh
 install -d -m 755 %buildroot%{_mandir}/man1
 make install DESTDIR=%buildroot
+cat %SOURCE1 >> %buildroot%{_sysconfdir}/rpm/macros.scl
 
 %clean
 rm -rf %buildroot
@@ -49,6 +51,10 @@ rm -rf %buildroot
 %{_sysconfdir}/rpm/macros.scl
 
 %changelog
+* Mon Apr 22 2012 Jindrich Novy <jnovy@redhat.com> 20120423-1
+- keep filesystem macros out of the main sources as
+  it is distro-dependent
+
 * Fri Apr 13 2012 Jindrich Novy <jnovy@redhat.com> 20120413-1
 - filesystem ownership by meta package
 - add man page
