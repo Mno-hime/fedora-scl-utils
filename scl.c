@@ -202,7 +202,6 @@ int main(int argc, char **argv) {
 
 	check_asprintf(&bash_cmd, "/bin/bash %s", tmp);
 	i = system(bash_cmd);
-	if (stdin_read) free(cmd);
 	free(bash_cmd);
 	unlink(tmp);
 

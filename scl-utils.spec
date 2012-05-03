@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120423
+Version:	20120503
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -51,6 +51,9 @@ rm -rf %buildroot
 %{_sysconfdir}/rpm/macros.scl
 
 %changelog
+* Thu May 03 2012 Jindrich Novy <jnovy@redhat.com> 20120503-1
+- avoid doublefree corruption when reading commands from stdin
+
 * Mon Apr 22 2012 Jindrich Novy <jnovy@redhat.com> 20120423-1
 - keep filesystem macros out of the main sources as
   it is distro-dependent
