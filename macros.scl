@@ -19,7 +19,7 @@
 %global _root_datadir		%{_prefix}/share
 %global _root_sysconfdir	%{_sysconfdir}
 %global _root_sharedstatedir	%{_prefix}/com
-%global _root_localstatedir	%{_prefix}/var
+%global _root_localstatedir	%{_localstatedir}
 %global _root_libdir		%{_exec_prefix}/%{_lib}
 %global _root_includedir	%{_prefix}/include
 %global _root_infodir		%{_datadir}/info
@@ -33,7 +33,7 @@
 %global _datadir		%{_prefix}/share
 %global _sysconfdir		%{_scl_root}/etc
 %global _sharedstatedir		%{_prefix}/com
-%global _localstatedir		%{_prefix}/var
+%global _localstatedir		%{_scl_root}/var
 %global _libdir			%{_exec_prefix}/%{_lib}
 %global _includedir		%{_prefix}/include
 %global _infodir		%{_datadir}/info
@@ -44,5 +44,6 @@
 BuildRequires: scl-utils-build
 }}
 
-%scl_require()	%{_scl_prefix}/%1/enable
+%scl_require()	%{_scl_prefix}/%1/enable, %1
+%scl_require_package() %1-%2
 

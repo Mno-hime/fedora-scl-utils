@@ -1,6 +1,6 @@
 %scl_files %{expand:
 %dir %attr(555,root,root) %{_scl_root}
-%{_scl_scripts}
+%dir %attr(555,root,root) %{_scl_scripts}
 %{_scl_scripts}/enable
 %{_root_sysconfdir}/scl/prefixes/%scl
 %{_scl_root}/bin

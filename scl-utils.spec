@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120503
+Version:	20120613
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -15,6 +15,7 @@ Run-time utility for alternative packaging.
 %package build
 Summary:	RPM build macros for alternative packaging
 Group:		Applications/File
+Requires:	iso-codes
 
 %description build
 Essential RPM build macros for alternative packaging.
@@ -51,6 +52,15 @@ rm -rf %buildroot
 %{_sysconfdir}/rpm/macros.scl
 
 %changelog
+* Wed Jun 13 2012 Jindrich Novy <jnovy@redhat.com> 20120613-1
+- Requires: iso-codes for basic filesystem in build subpackage
+- add scl_require_package() macro to depend on a particular package
+  from the collection
+- fix filesystem file list
+- tighten runtime package dependency via scl_require()
+- fix _localstatedir to point to the correct path according to redhat-rpm-config
+- thanks to Bohuslav Kabrda for feature proposals/QA/fixes
+
 * Thu May 03 2012 Jindrich Novy <jnovy@redhat.com> 20120503-1
 - avoid doublefree corruption when reading commands from stdin
 
