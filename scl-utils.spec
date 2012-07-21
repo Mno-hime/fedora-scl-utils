@@ -1,7 +1,7 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20120613
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		http://jnovy.fedorapeople.org/scl-utils/
@@ -52,6 +52,9 @@ rm -rf %buildroot
 %{_sysconfdir}/rpm/macros.scl
 
 %changelog
+* Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 20120613-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
 * Wed Jun 13 2012 Jindrich Novy <jnovy@redhat.com> 20120613-1
 - Requires: iso-codes for basic filesystem in build subpackage
 - add scl_require_package() macro to depend on a particular package
