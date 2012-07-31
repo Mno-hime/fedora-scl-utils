@@ -1,7 +1,7 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120613
-Release:	2%{?dist}
+Version:	20120731
+Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		http://jnovy.fedorapeople.org/scl-utils/
@@ -50,8 +50,14 @@ rm -rf %buildroot
 %files build
 %defattr(-,root,root,-)
 %{_sysconfdir}/rpm/macros.scl
+%{_rpmconfigdir}/scldeps.sh
+%{_rpmconfigdir}/fileattrs/scl.attr
 
 %changelog
+* Thu Jul 31 2012 Jindrich Novy <jnovy@redhat.com> 20120730-1
+- add functionality that allows to list all packages in a collection
+- add dependency generators
+
 * Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 20120613-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
