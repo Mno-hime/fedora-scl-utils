@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120731
+Version:	20120802
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -54,7 +54,10 @@ rm -rf %buildroot
 %{_rpmconfigdir}/fileattrs/scl.attr
 
 %changelog
-* Thu Jul 31 2012 Jindrich Novy <jnovy@redhat.com> 20120730-1
+* Thu Jul 31 2012 Jindrich Novy <jnovy@redhat.com> 20120802-1
+- update to 20120802
+
+* Thu Jul 31 2012 Jindrich Novy <jnovy@redhat.com> 20120731-1
 - add functionality that allows to list all packages in a collection
 - add dependency generators
 
