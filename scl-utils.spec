@@ -24,8 +24,7 @@ Essential RPM build macros for alternative packaging.
 %setup -q
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS"
-make
+make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 %install
 rm -rf %buildroot
