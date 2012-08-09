@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120802
+Version:	20120809
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -53,7 +53,11 @@ rm -rf %buildroot
 %{_rpmconfigdir}/fileattrs/scl.attr
 
 %changelog
-* Thu Jul 31 2012 Jindrich Novy <jnovy@redhat.com> 20120802-1
+* Thu Aug 09 2012 Jindrich Novy <jnovy@redhat.com> 20120809-1
+- update to 20120809
+- processes the SCL buildroot correctly now
+
+* Thu Aug 02 2012 Jindrich Novy <jnovy@redhat.com> 20120802-1
 - update to 20120802
 
 * Thu Jul 31 2012 Jindrich Novy <jnovy@redhat.com> 20120731-1
