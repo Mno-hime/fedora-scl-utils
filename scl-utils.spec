@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120613
+Version:	20120809
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -24,8 +24,7 @@ Essential RPM build macros for alternative packaging.
 %setup -q
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS"
-make
+make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 %install
 rm -rf %buildroot
@@ -50,8 +49,16 @@ rm -rf %buildroot
 %files build
 %defattr(-,root,root,-)
 %{_sysconfdir}/rpm/macros.scl
+%{_rpmconfigdir}/scldeps.sh
+%{_rpmconfigdir}/fileattrs/scl.attr
 
 %changelog
+* Thu Aug 09 2012 Jindrich Novy <jnovy@redhat.com> 20120809-1
+- update to 20120809
+- processes the SCL buildroot correctly now
+- add functionality that allows to list all packages in a collection
+- add dependency generators
+
 * Sat Jun 16 2012 Jindrich Novy <jnovy@redhat.com> 20120613-1
 - Requires: iso-codes for basic filesystem in build subpackage
 - add scl_require_package() macro to depend on a particular package
