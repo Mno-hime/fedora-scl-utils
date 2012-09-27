@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120809
+Version:	20120927
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -16,6 +16,7 @@ Run-time utility for alternative packaging.
 Summary:	RPM build macros for alternative packaging
 Group:		Applications/File
 Requires:	iso-codes
+Requires:	redhat-rpm-config
 
 %description build
 Essential RPM build macros for alternative packaging.
@@ -45,14 +46,25 @@ rm -rf %buildroot
 %{_bindir}/scl
 %{_bindir}/scl_enabled
 %{_mandir}/man1/*
+%{_sysconfdir}/bash_completion.d/scl.bash
 
 %files build
 %defattr(-,root,root,-)
 %{_sysconfdir}/rpm/macros.scl
 %{_rpmconfigdir}/scldeps.sh
 %{_rpmconfigdir}/fileattrs/scl.attr
+%{_rpmconfigdir}/brp-scl-compress
+%{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Thu Sep 27 2012 Jindrich Novy <jnovy@redhat.com> 20120927-1
+- update to 20120927
+- better BUILDROOT processing
+- bash completition for scl command
+- debuginfo package now has SCL-specific provide
+- non-SCL builds are without warning in build log
+- improved help
+
 * Thu Aug 09 2012 Jindrich Novy <jnovy@redhat.com> 20120809-1
 - update to 20120809
 - processes the SCL buildroot correctly now
