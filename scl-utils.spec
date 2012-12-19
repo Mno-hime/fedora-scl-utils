@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20120927
+Version:	20121110
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -31,6 +31,9 @@ make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 rm -rf %buildroot
 mkdir -p %buildroot%{_sysconfdir}/rpm
 mkdir -p %buildroot%{_sysconfdir}/scl/prefixes
+pushd %buildroot%{_sysconfdir}/scl
+ln -s prefixes conf
+popd
 mkdir -p %buildroot/opt/rh
 install -d -m 755 %buildroot%{_mandir}/man1
 make install DESTDIR=%buildroot
@@ -42,6 +45,7 @@ rm -rf %buildroot
 %files
 %defattr(-,root,root,-)
 %dir /opt/rh
+%dir %{_sysconfdir}/scl/conf
 %dir %{_sysconfdir}/scl/prefixes
 %{_bindir}/scl
 %{_bindir}/scl_enabled
@@ -50,6 +54,7 @@ rm -rf %buildroot
 
 %files build
 %defattr(-,root,root,-)
+%{_bindir}/sclbuild
 %{_sysconfdir}/rpm/macros.scl
 %{_rpmconfigdir}/scldeps.sh
 %{_rpmconfigdir}/fileattrs/scl.attr
@@ -57,6 +62,13 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed Dec 19 2012 Jindrich Novy <jnovy@redhat.com> 20121105-1
+- introduce sclbuild utility
+- fix exporting of env. variables when mutiple collections are
+  enabled at the same time
+- better bash completion
+- fix changelog
+
 * Thu Sep 27 2012 Jindrich Novy <jnovy@redhat.com> 20120927-1
 - update to 20120927
 - better BUILDROOT processing
@@ -72,7 +84,7 @@ rm -rf %buildroot
 * Thu Aug 02 2012 Jindrich Novy <jnovy@redhat.com> 20120802-1
 - update to 20120802
 
-* Thu Jul 31 2012 Jindrich Novy <jnovy@redhat.com> 20120731-1
+* Tue Jul 31 2012 Jindrich Novy <jnovy@redhat.com> 20120731-1
 - add functionality that allows to list all packages in a collection
 - add dependency generators
 
@@ -91,7 +103,7 @@ rm -rf %buildroot
 * Thu May 03 2012 Jindrich Novy <jnovy@redhat.com> 20120503-1
 - avoid doublefree corruption when reading commands from stdin
 
-* Mon Apr 22 2012 Jindrich Novy <jnovy@redhat.com> 20120423-1
+* Sun Apr 22 2012 Jindrich Novy <jnovy@redhat.com> 20120423-1
 - keep filesystem macros out of the main sources as
   it is distro-dependent
 
@@ -132,7 +144,7 @@ rm -rf %buildroot
 * Mon Oct 17 2011 Jindrich Novy <jnovy@redhat.com> 20111017-1
 - initial packaging for upstream
 
-* Thu Sep 21 2011 Jindrich Novy <jnovy@redhat.com> 0.1-14
+* Wed Sep 21 2011 Jindrich Novy <jnovy@redhat.com> 0.1-14
 - define %%_defaultdocdir to properly relocate docs into
   a stack
 - document a way how to pass command to stack via stdin
