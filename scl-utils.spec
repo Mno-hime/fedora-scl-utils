@@ -68,7 +68,7 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
-* Fri Feb 01 2012 Jindrich Novy <jnovy@redhat.com> 20121110-2
+* Fri Feb 01 2013 Jindrich Novy <jnovy@redhat.com> 20121110-2
 - add build compatibility fixes
 
 * Wed Dec 19 2012 Jindrich Novy <jnovy@redhat.com> 20121110-1
