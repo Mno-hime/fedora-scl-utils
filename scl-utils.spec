@@ -1,7 +1,7 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20121110
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		http://jnovy.fedorapeople.org/scl-utils/
@@ -39,6 +39,11 @@ install -d -m 755 %buildroot%{_mandir}/man1
 make install DESTDIR=%buildroot
 cat %SOURCE1 >> %buildroot%{_sysconfdir}/rpm/macros.scl
 
+# remove brp-python-hardlink invocation as it is not present in RHEL5
+%if 0%{?rhel} == 5
+  sed -i -e '/^.*brp-python-hardlink.*/d' %buildroot%{_sysconfdir}/rpm/macros.scl
+%endif
+
 %clean
 rm -rf %buildroot
 
@@ -52,6 +57,7 @@ rm -rf %buildroot
 %{_mandir}/man1/*
 %{_sysconfdir}/bash_completion.d/scl.bash
 
+%{!?_rpmconfigdir:%global _rpmconfigdir /usr/lib/rpm}
 %files build
 %defattr(-,root,root,-)
 %{_bindir}/sclbuild
@@ -62,7 +68,10 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
-* Wed Dec 19 2012 Jindrich Novy <jnovy@redhat.com> 20121105-1
+* Fri Feb 01 2012 Jindrich Novy <jnovy@redhat.com> 20121110-2
+- add build compatibility fixes
+
+* Wed Dec 19 2012 Jindrich Novy <jnovy@redhat.com> 20121110-1
 - introduce sclbuild utility
 - fix exporting of env. variables when mutiple collections are
   enabled at the same time
