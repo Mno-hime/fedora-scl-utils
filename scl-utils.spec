@@ -1,11 +1,11 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20121110
-Release:	2%{?dist}
+Version:	20130529
+Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
-URL:		http://jnovy.fedorapeople.org/scl-utils/
-Source0:	http://jnovy.fedorapeople.org/scl-utils/%{name}-%{version}.tar.gz
+URL:		https://fedorahosted.org/released/scl-utils/
+Source0:	https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.gz
 Source1:	macros.scl-filesystem
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -68,6 +68,10 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed May 29 2013 Jan Zeleny <jzeleny@redhat.com> - 20130529-1
+- changed the upstream tarball location
+- update to 20130529
+
 * Fri Feb 01 2013 Jindrich Novy <jnovy@redhat.com> 20121110-2
 - add build compatibility fixes
 
