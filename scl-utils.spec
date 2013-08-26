@@ -1,7 +1,7 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20130529
-Release:	2%{?dist}
+Release:	3%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		https://fedorahosted.org/released/scl-utils/
@@ -50,7 +50,7 @@ rm -rf %buildroot
 %files
 %defattr(-,root,root,-)
 %dir /opt/rh
-%dir %{_sysconfdir}/scl/conf
+%{_sysconfdir}/scl/conf
 %dir %{_sysconfdir}/scl/prefixes
 %{_bindir}/scl
 %{_bindir}/scl_enabled
@@ -68,6 +68,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Mon Aug 26 2013 Jan Zeleny <jzeleny@redhat.com> - 20130529-3
+- updated the file list to handle /etc/scl/conf correctly
+
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 20130529-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
