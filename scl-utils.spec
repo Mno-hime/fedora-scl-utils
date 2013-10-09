@@ -1,7 +1,7 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20131009
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		https://fedorahosted.org/released/scl-utils/
@@ -69,6 +69,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed Oct 09 2013 Jan Zeleny <jzeleny@redhat.com> - 20131009-2
+- new source file (fixed %_root_sharedstatedir)
+
 * Wed Oct 09 2013 Jan Zeleny <jzeleny@redhat.com> - 20131009-1
 - Correct the %_sharedstatedir macro
 - Don't install /%{_lib} when not necessary
