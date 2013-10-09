@@ -1,7 +1,7 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20130529
-Release:	3%{?dist}
+Version:	20131009
+Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		https://fedorahosted.org/released/scl-utils/
@@ -56,6 +56,7 @@ rm -rf %buildroot
 %{_bindir}/scl_enabled
 %{_mandir}/man1/*
 %{_sysconfdir}/bash_completion.d/scl.bash
+%doc LICENSE
 
 %{!?_rpmconfigdir:%global _rpmconfigdir /usr/lib/rpm}
 %files build
@@ -68,6 +69,19 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed Oct 09 2013 Jan Zeleny <jzeleny@redhat.com> - 20131009-1
+- Correct the %_sharedstatedir macro
+- Don't install /%{_lib} when not necessary
+- Add LICENSE file
+- Add scl_source script
+- Don't change directory in %scl_install
+- Don't generate provides from sonames in the SCL root
+- Add prefix to virtual provides of SCL packages
+- Implement "--" as a command separator
+- Removed binary file scl from git tracking
+- Fixed typo
+- Added example wrapper script.
+
 * Mon Aug 26 2013 Jan Zeleny <jzeleny@redhat.com> - 20130529-3
 - updated the file list to handle /etc/scl/conf correctly
 
