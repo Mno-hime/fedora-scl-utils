@@ -1,4 +1,6 @@
 %scl_files %{expand:
+%defattr(-,root,root,-)
+%dir %_scl_prefix
 %dir %attr(555,root,root) %{_scl_root}
 %dir %attr(555,root,root) %{_scl_scripts}
 %{_scl_scripts}/enable
@@ -262,7 +264,7 @@ H
 EOF
 mkdir -p %{buildroot}%{_scl_root}
 rm -f $RPM_BUILD_DIR/%{buildsubdir}/filesystem
-cd %{buildroot}%{_scl_root}
+pushd %{buildroot}%{_scl_root}
 mkdir -p boot dev \\
         etc/{X11/{applnk,fontpath.d},xdg/autostart,opt,pm/{config.d,power.d,sleep.d},xinetd.d,skel,sysconfig,pki} \\
         home media mnt opt proc root run/lock srv sys tmp \\
@@ -273,7 +275,9 @@ ln -snf spool/mail var/mail
 ln -snf usr/bin bin
 ln -snf usr/sbin sbin
 ln -snf usr/lib lib
+%ifarch x86_64 ppc ppc64 sparc sparc64 s390 s390x
 ln -snf usr/%{_lib} %{_lib}
+%endif
 sed -n -f %{buildroot}/iso_639.sed /usr/share/xml/iso-codes/iso_639.xml >%{buildroot}/iso_639.tab
 sed -n -f %{buildroot}/iso_3166.sed /usr/share/xml/iso-codes/iso_3166.xml >%{buildroot}/iso_3166.tab
 grep -v "^$" %{buildroot}/iso_639.tab | grep -v "^#" | while read a b c d ; do
@@ -321,4 +325,5 @@ for i in man{1,2,3,4,5,6,7,8,9,n,1x,2x,3x,4x,5x,6x,7x,8x,9x,0p,1p,3p}; do
    echo "%{_scl_root}/usr/share/man/$i" >> $RPM_BUILD_DIR/%{buildsubdir}/filesystem
 done
 set -x
+popd
 }
