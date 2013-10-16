@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20131015
+Version:	20131016
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -70,6 +70,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed Oct 16 2013 Jan Zeleny <jzeleny@redhat.com> - 20131016-1
+- fixed the -- separator behavior
+
 * Wed Oct 09 2013 Jan Zeleny <jzeleny@redhat.com> - 20131015-1
 - Correct the %_sharedstatedir and %_root_sharedstatedir macros
 - Don't install /%{_lib} when not necessary
