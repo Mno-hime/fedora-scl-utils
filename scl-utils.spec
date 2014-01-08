@@ -1,10 +1,10 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20131017
+Version:	20140108
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
-URL:		https://fedorahosted.org/released/scl-utils/
+URL:		https://fedorahosted.org/SoftwareCollections/
 Source0:	https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.gz
 Source1:	macros.scl-filesystem
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -70,6 +70,12 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed Jan 08 2014 Jan Zeleny <jzeleny@redhat.com> - 20140108-1
+- split _scl_prefix macro in two parts: scl_basedir and scl_vendor (#985233)
+- check if temp file is created (#1032666)
+- don't split command arguments containing white space (#1032666)
+- rename some attr rpm macros to stop confusing rpm (#1023625)
+
 * Thu Oct 17 2013 Jan Zeleny <jzeleny@redhat.com> - 20131017-1
 - fixed one issue in scl_source script
 
