@@ -1,6 +1,6 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20140108
+Version:	20140127
 Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
@@ -70,6 +70,12 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Mon Jan 27 2014 Jan Zeleny <jzeleny@redhat.com> - 20140127-1
+- don't exclude provides from SCLs (#1056183)
+- don't generate scl-package(%scl) in macros.scl, it's already
+  handled in dependency generator
+- add automatic Requires: %scl_runtime to every SCL package (#1054711)
+
 * Wed Jan 08 2014 Jan Zeleny <jzeleny@redhat.com> - 20140108-1
 - split _scl_prefix macro in two parts: scl_basedir and scl_vendor (#985233)
 - check if temp file is created (#1032666)
