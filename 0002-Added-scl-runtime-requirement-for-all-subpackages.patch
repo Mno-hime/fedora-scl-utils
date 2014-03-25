@@ -1,0 +1,44 @@
+From fb61e55ab3634a71d975a5d8b308d77a7a0afa1d Mon Sep 17 00:00:00 2001
+From: Albert Uchytil <auchytil@redhat.com>
+Date: Tue, 25 Mar 2014 11:25:55 +0100
+Subject: [PATCH] Added scl-runtime requirement to all subpackages
+
+---
+ macros.scl | 1 -
+ scl.attr   | 1 +
+ scldeps.sh | 3 +++
+ 3 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/macros.scl b/macros.scl
+index 50f4df2e6ac09ae1de7cde5e49f7c4c82db6ef70..8663198094404f7ef852aeeb84f47c4ed679a724 100644
+--- a/macros.scl
++++ b/macros.scl
+@@ -79,4 +79,3 @@ Provides: scl-package(%scl)
+ 
+ %scl_require()	%{_scl_prefix}/%1/enable, %1
+ %scl_require_package() %1-%2
+-
+diff --git a/scl.attr b/scl.attr
+index 5f7d91f452b8ba1e29e98892d0e0145fae89e55e..068fc4a995443340428fd75b017affed069188d3 100644
+--- a/scl.attr
++++ b/scl.attr
+@@ -1,2 +1,3 @@
+ %__scl_provides	%{_rpmconfigdir}/scldeps.sh --provides %{scl}
++%__scl_requires %{_rpmconfigdir}/scldeps.sh --requires %{scl_runtime}
+ %__scl_path	%{?scl:^%{_scl_prefix}/.*$ || %{_root_sysconfdir}/rpm/macros.%{scl}-config$}
+diff --git a/scldeps.sh b/scldeps.sh
+index 268d6bb5109f34d0e8da8c7d01816dcecffb6888..df8ddb3bb35b291de839bff0754c479958704030 100755
+--- a/scldeps.sh
++++ b/scldeps.sh
+@@ -9,5 +9,8 @@ case $1 in
+ -P|--provides)
+     echo -n "scl-package($2)"
+     ;;
++-R|--requires)
++    echo -n "$2"
++    ;;
+ esac
+ exit 0
+-- 
+1.8.5.3
+

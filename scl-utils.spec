@@ -1,13 +1,14 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20140127
-Release:	2%{?dist}
+Release:	3%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		https://fedorahosted.org/SoftwareCollections/
 Source0:	https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.gz
 Source1:	macros.scl-filesystem
 Patch0: 	0001-Added-Provides-scl-package-scl-for-metapackage-and-b.patch
+Patch1: 	0002-Added-scl-runtime-requirement-for-all-subpackages.patch
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -25,6 +26,7 @@ Essential RPM build macros for alternative packaging.
 %prep
 %setup -q
 %patch0 -p1 -b .provides-scl-package
+%patch1 -p1 -b .requires-scl-package
 
 %build
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
@@ -72,6 +74,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Tue Mar 18 2014 Albert Uchytil <auchytil@redhat.com> - 20140127-3
+- added scl-runtime requirement for all subpackages
+
 * Wed Mar 12 2014 Albert Uchytil <auchytil@redhat.com> - 20140127-2
 - %scl_files body moved to %scl_install
 - the "filesystem" file renamed back to "filelist"
