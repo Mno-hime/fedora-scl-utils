@@ -1,0 +1,100 @@
+From 1a276e247244fdbba739a09ac93765914499dd25 Mon Sep 17 00:00:00 2001
+From: Albert Uchytil <auchytil@redhat.com>
+Date: Wed, 2 Apr 2014 17:00:04 +0200
+Subject: [PATCH] Modified the behavior of debuginfo generation process
+
+* Removed debug package definition from macros.scl
+* Added %scl_debug macro, that adds correct dependencies to debug packages.
+* Added conditional definition of __debug_package macro
+  This change was required, to enable correct behavior for the case, when
+  the %debug_package is set to %{nil}. Moved %scl_debug macro call in front
+  of __os_install_post definition, to achieve desired macro expansion
+* Removed automatic creation of debuginfo metapackage.
+---
+ macros.scl | 51 ++++++++++++++++++++++++++++++++++-----------------
+ 1 file changed, 34 insertions(+), 17 deletions(-)
+
+diff --git a/macros.scl b/macros.scl
+index 8663198094404f7ef852aeeb84f47c4ed679a724..598b806ab16ca3bdbff8dbf3a6c6ba1ebd2aafd6 100644
+--- a/macros.scl
++++ b/macros.scl
+@@ -3,6 +3,39 @@
+ # Copyright (C) 2012 Red Hat, Inc.
+ #   Written by Jindrich Novy <jnovy@redhat.com>.
+ 
++%scl_debug() %{expand:
++%define old_debug %{lua:print(rpm.expand("%{debug_package}"):len())}
++%global debug_package %{expand:
++%if "%{?old_debug}" == "0"
++       %{expand: %{nil}}
++%else
++%if "%{?scl}%{!?scl:0}" == "%{pkg_name}"
++        %{expand: %{nil}}
++%else
++%ifnarch noarch
++%package debuginfo
++Summary: Debug information for package %{name}
++Group: Development/Debug
++AutoReqProv: 0
++Requires: %scl_runtime
++Provides: scl-package(%scl)
++%{lua:
++        debuginfo=tonumber(rpm.expand("%{old_debug}"))
++        if debuginfo > 0 then
++                rpm.define("__debug_package 1")
++        end
++}
++%description debuginfo
++This package provides debug information for package %{name}.
++Debug information is useful when developing applications that use this
++package or when debugging this package.
++%files debuginfo -f debugfiles.list
++%defattr(-,root,root)
++%endif
++%endif
++%endif
++%{nil}}}
++
+ %scl_package() %{expand:%{!?_root_prefix:
+ %global pkg_name		%1
+ %global scl_name		%{scl}
+@@ -43,6 +75,7 @@
+ %global _docdir			%{_datadir}/doc
+ %global _defaultdocdir		%{_docdir}
+ %global scl_pkg_name		%{scl}-%{pkg_name}
++%scl_debug
+ %global __os_install_post %{expand:
+     /usr/lib/rpm/brp-scl-compress %{_scl_root}
+     %{!?__debug_package:/usr/lib/rpm/redhat/brp-strip %{__strip}
+@@ -53,23 +86,6 @@
+     /usr/lib/rpm/redhat/brp-python-hardlink
+     %{!?__jar_repack:/usr/lib/rpm/redhat/brp-java-repack-jars}
+ %{nil}}
+-%global debug_package %{expand:
+-%ifnarch noarch
+-%global __debug_package 1
+-%package debuginfo
+-Summary: Debug information for package %{name}
+-Group: Development/Debug
+-AutoReqProv: 0
+-Requires: %scl_runtime
+-Provides: scl-package(%scl)
+-%description debuginfo
+-This package provides debug information for package %{name}.
+-Debug information is useful when developing applications that use this
+-package or when debugging this package.
+-%files debuginfo -f debugfiles.list
+-%defattr(-,root,root)
+-%endif
+-%{nil}}
+ Requires: %scl_runtime
+ }
+ BuildRequires: scl-utils-build
+@@ -79,3 +95,4 @@ Provides: scl-package(%scl)
+ 
+ %scl_require()	%{_scl_prefix}/%1/enable, %1
+ %scl_require_package() %1-%2
++
+-- 
+1.9.0
+

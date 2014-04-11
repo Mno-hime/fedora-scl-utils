@@ -103,6 +103,10 @@ echo -n '%' > %{buildroot}%{_root_sysconfdir}/rpm/macros.%{scl}-config
 cat >> %{buildroot}%{_root_sysconfdir}/rpm/macros.%{scl}-config << EOF
 scl %scl
 EOF
+echo -n '%' >> %{buildroot}%{_root_sysconfdir}/rpm/macros.%{scl}-config
+cat >> %{buildroot}%{_root_sysconfdir}/rpm/macros.%{scl}-config << EOF
+scl_vendor %{scl_vendor}
+EOF
 cat >> %{buildroot}%{_root_sysconfdir}/scl/prefixes/%{scl} << EOF
 %_scl_prefix
 EOF
