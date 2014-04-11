@@ -1,7 +1,7 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20140127
-Release:	3%{?dist}
+Release:	4%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		https://fedorahosted.org/SoftwareCollections/
@@ -9,6 +9,10 @@ Source0:	https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.gz
 Source1:	macros.scl-filesystem
 Patch0: 	0001-Added-Provides-scl-package-scl-for-metapackage-and-b.patch
 Patch1: 	0002-Added-scl-runtime-requirement-for-all-subpackages.patch
+Patch2: 	0003-Modified-the-behavior-of-debuginfo-generation-proces.patch
+Patch3: 	0004-Changed-scl_prefix-macro-that-now-accepts-a-parameter.patch
+Patch4: 	0005-Changed-command-description-in-scl-man-pages.patch
+Patch5: 	0006-Added-conditional-dependencies-for-main-metapackage.patch
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -27,6 +31,10 @@ Essential RPM build macros for alternative packaging.
 %setup -q
 %patch0 -p1 -b .provides-scl-package
 %patch1 -p1 -b .requires-scl-package
+%patch2 -p1 -b .scl-prefix-old
+%patch3 -p1 -b .debuginfo-old
+%patch4 -p1 -b .man-pages-old
+%patch5 -p1 -b .conditional-deps
 
 %build
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
@@ -74,6 +82,15 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Fri Apr 11 2014 Albert Uchytil <auchytil@redhat.com> - 20140127-4
+- reverted "-f filelist" modification
+- added %scl_vendor macro to macros.%{scl}-config file (#1084095)
+- %scl_prefix now accepts a parameter to improve
+  inter-collection dependencies (#1028953)
+- modified the behavior of debuginfo generation process
+- changed command description in scl man pages
+- added conditional dependencies for main metapackage
+
 * Tue Mar 18 2014 Albert Uchytil <auchytil@redhat.com> - 20140127-3
 - added scl-runtime requirement for all subpackages
 
