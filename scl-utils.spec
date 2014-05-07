@@ -1,7 +1,7 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20140127
-Release:	4%{?dist}
+Release:	5%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		https://fedorahosted.org/SoftwareCollections/
@@ -13,6 +13,7 @@ Patch2: 	0003-Modified-the-behavior-of-debuginfo-generation-proces.patch
 Patch3: 	0004-Changed-scl_prefix-macro-that-now-accepts-a-parameter.patch
 Patch4: 	0005-Changed-command-description-in-scl-man-pages.patch
 Patch5: 	0006-Added-conditional-dependencies-for-main-metapackage.patch
+Patch6:     0007-Changed-script-paths-in-__os_install_post.patch
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -35,6 +36,7 @@ Essential RPM build macros for alternative packaging.
 %patch3 -p1 -b .debuginfo-old
 %patch4 -p1 -b .man-pages-old
 %patch5 -p1 -b .conditional-deps
+%patch6 -p1 -b .macros_script_paths
 
 %build
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
@@ -82,6 +84,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed May 07 2014 Albert Uchytil <auchytil@redhat.com> - 20140127-5
+- changed __os_install_post script paths to keep up with rpm (#1093074)
+
 * Fri Apr 11 2014 Albert Uchytil <auchytil@redhat.com> - 20140127-4
 - reverted "-f filelist" modification
 - added %scl_vendor macro to macros.%{scl}-config file (#1084095)
