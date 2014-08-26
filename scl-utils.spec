@@ -1,19 +1,12 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
-Version:	20140127
-Release:	5%{?dist}
+Version:	20140815
+Release:	1%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		https://fedorahosted.org/SoftwareCollections/
 Source0:	https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.gz
 Source1:	macros.scl-filesystem
-Patch0: 	0001-Added-Provides-scl-package-scl-for-metapackage-and-b.patch
-Patch1: 	0002-Added-scl-runtime-requirement-for-all-subpackages.patch
-Patch2: 	0003-Modified-the-behavior-of-debuginfo-generation-proces.patch
-Patch3: 	0004-Changed-scl_prefix-macro-that-now-accepts-a-parameter.patch
-Patch4: 	0005-Changed-command-description-in-scl-man-pages.patch
-Patch5: 	0006-Added-conditional-dependencies-for-main-metapackage.patch
-Patch6:     0007-Changed-script-paths-in-__os_install_post.patch
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -29,14 +22,7 @@ Requires:	redhat-rpm-config
 Essential RPM build macros for alternative packaging.
 
 %prep
-%setup -q
-%patch0 -p1 -b .provides-scl-package
-%patch1 -p1 -b .requires-scl-package
-%patch2 -p1 -b .scl-prefix-old
-%patch3 -p1 -b .debuginfo-old
-%patch4 -p1 -b .man-pages-old
-%patch5 -p1 -b .conditional-deps
-%patch6 -p1 -b .macros_script_paths
+%autosetup
 
 %build
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
@@ -76,14 +62,18 @@ rm -rf %buildroot
 %{!?_rpmconfigdir:%global _rpmconfigdir /usr/lib/rpm}
 %files build
 %defattr(-,root,root,-)
-%{_bindir}/sclbuild
 %{_sysconfdir}/rpm/macros.scl
 %{_rpmconfigdir}/scldeps.sh
 %{_rpmconfigdir}/fileattrs/scl.attr
+%{_rpmconfigdir}/fileattrs/sclbuild.attr
 %{_rpmconfigdir}/brp-scl-compress
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Tue Aug 26 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-1
+- rebased to 20140815
+- switched to %autosetup in %prep
+
 * Wed May 07 2014 Albert Uchytil <auchytil@redhat.com> - 20140127-5
 - changed __os_install_post script paths to keep up with rpm (#1093074)
 
