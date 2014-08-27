@@ -1,12 +1,13 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20140815
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		https://fedorahosted.org/SoftwareCollections/
 Source0:	https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.gz
 Source1:	macros.scl-filesystem
+%{lua: i=0; for p in posix.files() do if string.match(p, "%d+.*%.patch$") then print(string.format("Patch%u: %s\n", i, p)); i=i+1; end end}
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -70,6 +71,10 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed Aug 27 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-2
+- fixed the paths in /etc/opt and /var/opt (missing /scls/)
+- adjust the spec so all patches are automatically applied
+
 * Tue Aug 26 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-1
 - rebased to 20140815
 - switched to %autosetup in %prep
