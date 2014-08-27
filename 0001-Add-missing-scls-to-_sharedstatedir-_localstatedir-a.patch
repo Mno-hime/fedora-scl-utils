@@ -1,0 +1,30 @@
+From 2d94a156c27f53301c0cda8075e1af3115fbdaa4 Mon Sep 17 00:00:00 2001
+From: Jan Zeleny <jzeleny@redhat.com>
+Date: Wed, 27 Aug 2014 14:20:16 +0200
+Subject: [PATCH] Add missing /scls/ to %_sharedstatedir, %_localstatedir and
+ %_sysconfdir
+
+---
+ macros.scl | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/macros.scl b/macros.scl
+index f4eac508a77970d8c7df708f0b6f364f84f4d0b0..094bde95d390640fb070424b50d31b0a495c732c 100644
+--- a/macros.scl
++++ b/macros.scl
+@@ -67,9 +67,9 @@ package or when debugging this package.
+ %global _sbindir		%{_exec_prefix}/sbin
+ %global _libexecdir		%{_exec_prefix}/libexec
+ %global _datadir		%{_prefix}/share
+-%global _sysconfdir		%{_root_sysconfdir}/opt/%{scl_vendor}/%{scl}
+-%global _sharedstatedir		%{_root_localstatedir}/opt/%{scl_vendor}/%{scl}/lib
+-%global _localstatedir		%{_root_localstatedir}/opt/%{scl_vendor}/%{scl}
++%global _sysconfdir		%{_root_sysconfdir}/opt/%{scl_vendor}/scls/%{scl}
++%global _sharedstatedir		%{_root_localstatedir}/opt/%{scl_vendor}/scls/%{scl}/lib
++%global _localstatedir		%{_root_localstatedir}/opt/%{scl_vendor}/scls/%{scl}
+ %global _libdir			%{_exec_prefix}/%{_lib}
+ %global _includedir		%{_prefix}/include
+ %global _infodir		%{_datadir}/info
+-- 
+1.9.3
+
