@@ -98,9 +98,12 @@
 %scl_install %{expand:
 # scl specific stuff
 mkdir -p %{buildroot}%{_root_sysconfdir}/{rpm,scl/prefixes}
-echo -n '%' > %{buildroot}%{_root_sysconfdir}/rpm/macros.%{scl}-config
 cat >> %{buildroot}%{_root_sysconfdir}/rpm/macros.%{scl}-config << EOF
-scl %scl
+%%%%scl %scl
+%{?nfsmountable:%%%%nfsmountable %{nfsmountable}}
+%{!?nfsmountable:%%%%undefine nfsmountable}
+%{?scl_vendor_in_name:%%%%scl_vendor_in_name %{scl_vendor_in_name}}
+%{!?scl_vendor_in_name:%%%%undefine scl_vendor_in_name}
 EOF
 cat >> %{buildroot}%{_root_sysconfdir}/scl/prefixes/%{scl} << EOF
 %_scl_prefix
