@@ -1,7 +1,7 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20140815
-Release:	2%{?dist}
+Release:	3%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		https://fedorahosted.org/SoftwareCollections/
@@ -71,6 +71,11 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Fri Dec 12 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-3
+- add support for register/deregister scriptlets
+- add support %nfsmountable macro
+- fix some paths in %scl_files and %scl_install
+
 * Wed Aug 27 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-2
 - fixed the paths in /etc/opt and /var/opt (missing /scls/)
 - adjust the spec so all patches are automatically applied
