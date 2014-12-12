@@ -1,13 +1,16 @@
 Summary:	Utilities for alternative packaging
 Name:		scl-utils
 Version:	20140815
-Release:	3%{?dist}
+Release:	4%{?dist}
 License:	GPLv2+
 Group:		Applications/File
 URL:		https://fedorahosted.org/SoftwareCollections/
 Source0:	https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.gz
 Source1:	macros.scl-filesystem
-%{lua: i=0; for p in posix.files() do if string.match(p, "%d+.*%.patch$") then print(string.format("Patch%u: %s\n", i, p)); i=i+1; end end}
+Patch1:     0001-Add-missing-scls-to-_sharedstatedir-_localstatedir-a.patch
+Patch2:     0002-Add-support-for-nfsmountable-macro.patch
+Patch3:     0003-Run-register-and-deregister-scriptlets-during-the-re.patch
+Patch4:     0004-Use-vendor-in-package-names-if-required.patch
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -71,6 +74,10 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Fri Dec 12 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-4
+- propagate the %nfsmountable into -build subpackage content
+- use vendor prefix in the names of the packages if required
+
 * Fri Dec 12 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-3
 - add support for register/deregister scriptlets
 - add support %nfsmountable macro
