@@ -1,26 +1,27 @@
-Summary:	Utilities for alternative packaging
-Name:		scl-utils
-Version:	20140815
-Release:	4%{?dist}
-License:	GPLv2+
-Group:		Applications/File
-URL:		https://fedorahosted.org/SoftwareCollections/
-Source0:	https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.gz
-Source1:	macros.scl-filesystem
-Patch1:     0001-Add-missing-scls-to-_sharedstatedir-_localstatedir-a.patch
-Patch2:     0002-Add-support-for-nfsmountable-macro.patch
-Patch3:     0003-Run-register-and-deregister-scriptlets-during-the-re.patch
-Patch4:     0004-Use-vendor-in-package-names-if-required.patch
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Name:       scl-utils
+Epoch:      1
+Version:    2.0
+Release:    1%{dist}
+Summary:    Utilities for alternative packaging
+
+License:    GPLv2+
+Group:      Applications/File
+URL:        https://fedorahosted.org/SoftwareCollections/
+Source0:    %{name}-%{version}.tar.bz2
+Source1:    macros.scl-filesystem
+Buildrequires:  cmake
+Buildrequires:  rpm-devel
+Requires:   environment-modules
+Requires:   rpm-libs
 
 %description
 Run-time utility for alternative packaging.
 
 %package build
-Summary:	RPM build macros for alternative packaging
-Group:		Applications/File
-Requires:	iso-codes
-Requires:	redhat-rpm-config
+Summary:    RPM build macros for alternative packaging
+Group:      Applications/File
+Requires:   iso-codes
+Requires:   redhat-rpm-config
 
 %description build
 Essential RPM build macros for alternative packaging.
@@ -29,41 +30,36 @@ Essential RPM build macros for alternative packaging.
 %autosetup
 
 %build
+%cmake
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
-%install
-rm -rf %buildroot
-mkdir -p %buildroot%{_sysconfdir}/rpm
-mkdir -p %buildroot%{_sysconfdir}/scl/prefixes
-pushd %buildroot%{_sysconfdir}/scl
-ln -s prefixes conf
-popd
-mkdir -p %buildroot/opt/rh
-install -d -m 755 %buildroot%{_mandir}/man1
-make install DESTDIR=%buildroot
-cat %SOURCE1 >> %buildroot%{_sysconfdir}/rpm/macros.scl
 
-# remove brp-python-hardlink invocation as it is not present in RHEL5
-%if 0%{?rhel} == 5
-  sed -i -e '/^.*brp-python-hardlink.*/d' %buildroot%{_sysconfdir}/rpm/macros.scl
-%endif
+%install
+rm -rf %{buildroot}
+make install DESTDIR=%{buildroot}
+cat %SOURCE1 >> %{buildroot}%{_sysconfdir}/rpm/macros.scl
+mkdir -p %{buildroot}%{_sysconfdir}/scl
+cd %{buildroot}%{_sysconfdir}/scl
+mkdir modulefiles
+mkdir prefixes
+ln -s prefixes conf
 
 %clean
 rm -rf %buildroot
 
 %files
 %defattr(-,root,root,-)
-%dir /opt/rh
-%{_sysconfdir}/scl/conf
+%dir %{_sysconfdir}/scl/modulefiles
 %dir %{_sysconfdir}/scl/prefixes
+%{_sysconfdir}/scl/conf
+%{_sysconfdir}/bash_completion.d/scl-completion.bash
+%{_sysconfdir}/profile.d/scl-init.sh
 %{_bindir}/scl
 %{_bindir}/scl_enabled
 %{_bindir}/scl_source
-%{_mandir}/man1/*
-%{_sysconfdir}/bash_completion.d/scl.bash
+%{_mandir}/man1/scl.1.gz
 %doc LICENSE
 
-%{!?_rpmconfigdir:%global _rpmconfigdir /usr/lib/rpm}
 %files build
 %defattr(-,root,root,-)
 %{_sysconfdir}/rpm/macros.scl
@@ -74,6 +70,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Thu Jan 08 2015 Lubos Kardos <lkardos@redhat.com> - 2.0-1
+- rebase to scl-utils-2.0
+
 * Fri Dec 12 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-4
 - propagate the %nfsmountable into -build subpackage content
 - use vendor prefix in the names of the packages if required
