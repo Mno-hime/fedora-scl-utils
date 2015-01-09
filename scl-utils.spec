@@ -1,13 +1,13 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0
-Release:    1%{dist}
+Release:    2%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
 Group:      Applications/File
 URL:        https://fedorahosted.org/SoftwareCollections/
-Source0:    %{name}-%{version}.tar.bz2
+Source0:    https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.bz2
 Source1:    macros.scl-filesystem
 Buildrequires:  cmake
 Buildrequires:  rpm-devel
@@ -70,6 +70,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Fri Jan 09 2015 Jan Zeleny <jzeleny@redhat.com> - 2.0-2
+- corrected URL of Source0
+
 * Thu Jan 08 2015 Lubos Kardos <lkardos@redhat.com> - 2.0-1
 - rebase to scl-utils-2.0
 
