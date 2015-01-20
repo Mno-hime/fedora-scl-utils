@@ -1,7 +1,7 @@
 Name:       scl-utils
 Epoch:      1
-Version:    2.0
-Release:    2%{dist}
+Version:    2.0.1
+Release:    1%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -12,7 +12,6 @@ Source1:    macros.scl-filesystem
 Buildrequires:  cmake
 Buildrequires:  rpm-devel
 Requires:   environment-modules
-Requires:   rpm-libs
 
 %description
 Run-time utility for alternative packaging.
@@ -52,8 +51,8 @@ rm -rf %buildroot
 %dir %{_sysconfdir}/scl/modulefiles
 %dir %{_sysconfdir}/scl/prefixes
 %{_sysconfdir}/scl/conf
-%{_sysconfdir}/bash_completion.d/scl-completion.bash
-%{_sysconfdir}/profile.d/scl-init.sh
+%config %{_sysconfdir}/bash_completion.d/scl-completion.bash
+%config %{_sysconfdir}/profile.d/scl-init.sh
 %{_bindir}/scl
 %{_bindir}/scl_enabled
 %{_bindir}/scl_source
@@ -70,20 +69,25 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
-* Fri Jan 09 2015 Jan Zeleny <jzeleny@redhat.com> - 2.0-2
+* Tue Jan 20 2015 Lubos Kardos <lkardos@redhat.com> - 1:2.0.1-1
+- rebase to scl-utils-2.0.1
+- escaped macros in changelog
+- added %%config for files in /etc
+
+* Fri Jan 09 2015 Jan Zeleny <jzeleny@redhat.com> - 1:2.0-2
 - corrected URL of Source0
 
-* Thu Jan 08 2015 Lubos Kardos <lkardos@redhat.com> - 2.0-1
+* Thu Jan 08 2015 Lubos Kardos <lkardos@redhat.com> - 1:2.0-1
 - rebase to scl-utils-2.0
 
 * Fri Dec 12 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-4
-- propagate the %nfsmountable into -build subpackage content
+- propagate the %%nfsmountable into -build subpackage content
 - use vendor prefix in the names of the packages if required
 
 * Fri Dec 12 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-3
 - add support for register/deregister scriptlets
-- add support %nfsmountable macro
-- fix some paths in %scl_files and %scl_install
+- add support %%nfsmountable macro
+- fix some paths in %%scl_files and %%scl_install
 
 * Wed Aug 27 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-2
 - fixed the paths in /etc/opt and /var/opt (missing /scls/)
@@ -91,15 +95,15 @@ rm -rf %buildroot
 
 * Tue Aug 26 2014 Jan Zeleny <jzeleny@redhat.com> - 20140815-1
 - rebased to 20140815
-- switched to %autosetup in %prep
+- switched to %%autosetup in %%prep
 
 * Wed May 07 2014 Albert Uchytil <auchytil@redhat.com> - 20140127-5
 - changed __os_install_post script paths to keep up with rpm (#1093074)
 
 * Fri Apr 11 2014 Albert Uchytil <auchytil@redhat.com> - 20140127-4
 - reverted "-f filelist" modification
-- added %scl_vendor macro to macros.%{scl}-config file (#1084095)
-- %scl_prefix now accepts a parameter to improve
+- added %%scl_vendor macro to macros.%%{scl}-config file (#1084095)
+- %%scl_prefix now accepts a parameter to improve
   inter-collection dependencies (#1028953)
 - modified the behavior of debuginfo generation process
 - changed command description in scl man pages
@@ -109,15 +113,15 @@ rm -rf %buildroot
 - added scl-runtime requirement for all subpackages
 
 * Wed Mar 12 2014 Albert Uchytil <auchytil@redhat.com> - 20140127-2
-- %scl_files body moved to %scl_install
+- %%scl_files body moved to %%scl_install
 - the "filesystem" file renamed back to "filelist"
-- add automatic Provide: scl-package(%scl) to all scl-related packages (#105290)
+- add automatic Provide: scl-package(%%scl) to all scl-related packages (#105290)
 
 * Mon Jan 27 2014 Jan Zeleny <jzeleny@redhat.com> - 20140127-1
 - don't exclude provides from SCLs (#1056183)
-- don't generate scl-package(%scl) in macros.scl, it's already
+- don't generate scl-package(%%scl) in macros.scl, it's already
   handled in dependency generator
-- add automatic Requires: %scl_runtime to every SCL package (#1054711)
+- add automatic Requires: %%scl_runtime to every SCL package (#1054711)
 
 * Wed Jan 08 2014 Jan Zeleny <jzeleny@redhat.com> - 20140108-1
 - split _scl_prefix macro in two parts: scl_basedir and scl_vendor (#985233)
@@ -132,11 +136,11 @@ rm -rf %buildroot
 - fixed the -- separator behavior
 
 * Wed Oct 09 2013 Jan Zeleny <jzeleny@redhat.com> - 20131015-1
-- Correct the %_sharedstatedir and %_root_sharedstatedir macros
-- Don't install /%{_lib} when not necessary
+- Correct the %%_sharedstatedir and %%_root_sharedstatedir macros
+- Don't install /%%{_lib} when not necessary
 - Add LICENSE file
 - Add scl_source script
-- Don't change directory in %scl_install
+- Don't change directory in %%scl_install
 - Don't generate provides from sonames in the SCL root
 - Add the SCL prefix to virtual provides of SCL-based packages
 - Implement "--" as a command separator
