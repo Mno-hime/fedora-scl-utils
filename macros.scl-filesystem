@@ -4,6 +4,8 @@
 %dir %attr(555,root,root) %{_scl_root}
 %dir %attr(555,root,root) %{_scl_scripts}
 %{_scl_scripts}/enable
+%{_scl_scripts}/%{scl}
+%{_root_sysconfdir}/scl/modulefiles/%{scl}
 %{_root_sysconfdir}/scl/prefixes/%scl
 %{_scl_root}/bin
 %attr(555,root,root) %{_scl_root}/boot
@@ -97,17 +99,16 @@
 
 %scl_install %{expand:
 # scl specific stuff
-mkdir -p %{buildroot}%{_root_sysconfdir}/{rpm,scl/prefixes}
+mkdir -p %{buildroot}%{_root_sysconfdir}/{rpm,scl/{prefixes,modulefiles}}
 cat >> %{buildroot}%{_root_sysconfdir}/rpm/macros.%{scl}-config << EOF
 %%%%scl %scl
 %{?nfsmountable:%%%%nfsmountable %{nfsmountable}}
 %{!?nfsmountable:%%%%undefine nfsmountable}
-%{?scl_vendor_in_name:%%%%scl_vendor_in_name %{scl_vendor_in_name}}
-%{!?scl_vendor_in_name:%%%%undefine scl_vendor_in_name}
 EOF
 cat >> %{buildroot}%{_root_sysconfdir}/scl/prefixes/%{scl} << EOF
 %_scl_prefix
 EOF
+ln -s %{_scl_scripts}/%{scl} %{buildroot}%{_root_sysconfdir}/scl/modulefiles/%{scl}
 # filelist
 set +x
 cat >> %{buildroot}/lang-exceptions << EOF
