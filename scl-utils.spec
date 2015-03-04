@@ -1,7 +1,9 @@
+%global macrosdir %(d=%{_rpmconfigdir}/macros.d; [ -d $d ] || d=%{_sysconfdir}/rpm; echo $d)
+
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    2%{dist}
+Release:    3%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -36,7 +38,7 @@ make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
-cat %SOURCE1 >> %{buildroot}%{_sysconfdir}/rpm/macros.scl
+cat %SOURCE1 >> %{buildroot}%{macrosdir}/macros.scl
 mkdir -p %{buildroot}%{_sysconfdir}/scl
 cd %{buildroot}%{_sysconfdir}/scl
 mkdir modulefiles
@@ -61,7 +63,7 @@ rm -rf %buildroot
 
 %files build
 %defattr(-,root,root,-)
-%{_sysconfdir}/rpm/macros.scl
+%{macrosdir}/macros.scl
 %{_rpmconfigdir}/scldeps.sh
 %{_rpmconfigdir}/fileattrs/scl.attr
 %{_rpmconfigdir}/fileattrs/sclbuild.attr
@@ -69,6 +71,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed Mar  4 2015 Ville Skyttä <ville.skytta@iki.fi> - 1:2.0.1-3
+- Install macros in %%{_rpmconfigdir}/macros.d where available (#1074284)
+
 * Wed Jan 21 2015 Lubos Kardos <lkardos@redhat.com> - 1:2.0.1-2
 - added owning of module file
 
