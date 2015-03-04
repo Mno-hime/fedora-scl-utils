@@ -38,6 +38,11 @@ make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
+if [ %{macrosdir} != %{_sysconfdir}/rpm ]; then
+    mkdir -p %{buildroot}%{macrosdir}
+    mv %{buildroot}%{_sysconfdir}/rpm/macros.scl %{buildroot}%{macrosdir}
+    rmdir %{buildroot}%{_sysconfdir}/rpm
+fi
 cat %SOURCE1 >> %{buildroot}%{macrosdir}/macros.scl
 mkdir -p %{buildroot}%{_sysconfdir}/scl
 cd %{buildroot}%{_sysconfdir}/scl
