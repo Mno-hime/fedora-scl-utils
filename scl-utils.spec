@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    3%{dist}
+Release:    4%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -76,6 +76,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Fri Jun 19 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.0.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Wed Mar  4 2015 Ville Skyttä <ville.skytta@iki.fi> - 1:2.0.1-3
 - Install macros in %%{_rpmconfigdir}/macros.d where available (#1074284)
 
