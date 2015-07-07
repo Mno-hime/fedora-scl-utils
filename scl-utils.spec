@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    4%{dist}
+Release:    5%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -14,6 +14,8 @@ Source1:    macros.scl-filesystem
 Buildrequires:  cmake
 Buildrequires:  rpm-devel
 Requires:   environment-modules
+
+Patch1:     0001-Honor-CFLAGS-passed-to-cmake.patch
 
 %description
 Run-time utility for alternative packaging.
@@ -28,7 +30,7 @@ Requires:   redhat-rpm-config
 Essential RPM build macros for alternative packaging.
 
 %prep
-%autosetup
+%autosetup -p1
 
 %build
 %cmake
@@ -76,6 +78,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Tue Jul 07 2015 Lubos Kardos <lkardos@redhat.com> - 1:2.0.1-5
+- Honor CFLAGS passed to cmake (#1239997)
+
 * Fri Jun 19 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.0.1-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
