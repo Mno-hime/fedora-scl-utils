@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    5%{dist}
+Release:    6%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -78,6 +78,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Mon Jul 27 2015 Lubos Kardos <lkardos@redhat.com> - 1:2.0.1-6
+- Rebuild with the newest rpm.
+
 * Tue Jul 07 2015 Lubos Kardos <lkardos@redhat.com> - 1:2.0.1-5
 - Honor CFLAGS passed to cmake (#1239997)
 
