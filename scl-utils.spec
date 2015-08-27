@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    5%{dist}
+Release:    6%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -16,6 +16,7 @@ Buildrequires:  rpm-devel
 Requires:   environment-modules
 
 Patch1:     0001-Honor-CFLAGS-passed-to-cmake.patch
+Patch2:     0002-Fix-core-dumps-with-large-input-on-stdin-rhbz-125727.patch
 
 %description
 Run-time utility for alternative packaging.
@@ -78,6 +79,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Thu Aug 27 2015 Lubos Kardos <lkardos@redhat.com> - 1:2.0.1-6
+- Fix core dumps with large input on stdin (#1257274)
+
 * Tue Jul 07 2015 Lubos Kardos <lkardos@redhat.com> - 1:2.0.1-5
 - Honor CFLAGS passed to cmake (#1239997)
 
