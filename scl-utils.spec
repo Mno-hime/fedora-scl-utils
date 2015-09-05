@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    6%{dist}
+Release:    7%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -79,6 +79,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Sat Sep 05 2015 Kalev Lember <klember@redhat.com> - 1:2.0.1-7
+- Rebuilt for librpm soname bump
+
 * Thu Aug 27 2015 Lubos Kardos <lkardos@redhat.com> - 1:2.0.1-6
 - Fix core dumps with large input on stdin (#1257274)
 
