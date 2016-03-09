@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    9%{dist}
+Release:    10%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -17,6 +17,7 @@ Requires:   environment-modules
 
 Patch1:     0001-Honor-CFLAGS-passed-to-cmake.patch
 Patch2:     0002-Fix-core-dumps-with-large-input-on-stdin-rhbz-125727.patch
+Patch3:     0003-Scl-utils-layout-patch-from-fedora-famillecollet.com.patch
 
 %description
 Run-time utility for alternative packaging.
@@ -79,6 +80,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed Mar 09 2016 Lubos Kardos <lkardos@redhat.com> -1:2.0.1-10
+- apply rh layout fixes from Remi Collet (#1198693)
+
 * Mon Mar  7 2016 Remi Collet <remi@fedoraproject.org> - 1:2.0.1-9
 - fix grep usage in macros.scl #1315051
 
