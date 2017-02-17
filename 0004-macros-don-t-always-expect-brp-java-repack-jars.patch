@@ -1,0 +1,33 @@
+From ad2fc7ee78562a92e1ad9fd784139591ebb21300 Mon Sep 17 00:00:00 2001
+From: Pavel Raiskup <praiskup@redhat.com>
+Date: Thu, 16 Feb 2017 11:25:25 +0100
+Subject: [PATCH] macros: don't always expect brp-java-repack-jars
+
+This script has been dropped from redhat-rpm-config in F26+
+(package commit 3234495f75b7a89879ce3e1c37f6bd6c779615d5)
+
+Resolves: rhbz#1409277
+---
+ rpm/macros.scl | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/rpm/macros.scl b/rpm/macros.scl
+index 1246fde..5a8bd5c 100644
+--- a/rpm/macros.scl
++++ b/rpm/macros.scl
+@@ -83,6 +83,12 @@ package or when debugging this package.
+ %{?scl_dependency_generators:%scl_dependency_generators}
+ %global scl_pkg_name		%{scl}-%{pkg_name}
+ %scl_debug
++%{lua:
++  if tonumber(rpm.expand('0%{?fedora}'), 10) >= 26 or
++     tonumber(rpm.expand('0%{?rhel}'), 10) >= 8 then
++    rpm.define('__jar_repack %nil')
++  end
++}
+ %global __os_install_post %{expand:
+     /usr/lib/rpm/brp-scl-compress %{_scl_root}
+     %{!?__debug_package:/usr/lib/rpm/brp-strip %{__strip}
+-- 
+2.9.3
+
