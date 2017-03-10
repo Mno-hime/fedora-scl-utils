@@ -1,0 +1,24 @@
+From 81447915a8b9f078f4f96938142810667183cd6a Mon Sep 17 00:00:00 2001
+From: Remi Collet <remi@remirepo.net>
+Date: Fri, 10 Mar 2017 08:05:22 +0100
+Subject: [PATCH 4/4] drop unneeded brp-java-repack-jars
+
+---
+ rpm/macros.scl | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/rpm/macros.scl b/rpm/macros.scl
+index 41c6be4..dbff6e8 100644
+--- a/rpm/macros.scl
++++ b/rpm/macros.scl
+@@ -94,7 +94,6 @@ package or when debugging this package.
+     /usr/lib/rpm/brp-strip-static-archive %{__strip}
+     /usr/lib/rpm/brp-scl-python-bytecompile %{__python} %{?_python_bytecompile_errors_terminate_build} %{_scl_root}
+     /usr/lib/rpm/brp-python-hardlink
+-    %{!?__jar_repack:/usr/lib/rpm/redhat/brp-java-repack-jars}
+ %{nil}}
+ BuildRequires: scl-utils-build
+ %if "%{?scl}%{!?scl:0}" == "%{pkg_name}"
+-- 
+2.9.3
+

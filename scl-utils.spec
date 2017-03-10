@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    11%{dist}
+Release:    12%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -13,11 +13,13 @@ Source0:    https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.b
 Source1:    macros.scl-filesystem
 Buildrequires:  cmake
 Buildrequires:  rpm-devel
+Buildrequires:  git
 Requires:   environment-modules
 
 Patch1:     0001-Honor-CFLAGS-passed-to-cmake.patch
 Patch2:     0002-Fix-core-dumps-with-large-input-on-stdin-rhbz-125727.patch
 Patch3:     0003-Scl-utils-layout-patch-from-fedora-famillecollet.com.patch
+Patch4:     0004-drop-unneeded-brp-java-repack-jars.patch
 
 %description
 Run-time utility for alternative packaging.
@@ -32,7 +34,7 @@ Requires:   redhat-rpm-config
 Essential RPM build macros for alternative packaging.
 
 %prep
-%autosetup -p1
+%autosetup -S git
 
 %build
 %cmake
@@ -80,6 +82,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Fri Mar 10 2017 Remi Collet <remi@remirepo.net> - 1:2.0.1-12
+- drop brp-java-repack-jars #1431004
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.0.1-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
