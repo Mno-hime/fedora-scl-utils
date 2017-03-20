@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    12%{dist}
+Release:    13%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -81,6 +81,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Mon Mar 20 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.1-13
+- Own license directory by runtime (#1206044)
+
 * Mon Mar 20 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.1-12
 - Don't try to use no longer existing brp-java-repack-jars script (#1409277)
 
