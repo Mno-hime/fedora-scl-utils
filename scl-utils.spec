@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    13%{dist}
+Release:    14%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -13,7 +13,7 @@ Source0:    https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.b
 Source1:    macros.scl-filesystem
 Buildrequires:  cmake
 Buildrequires:  rpm-devel
-Requires:   environment-modules
+Requires:   environment(modules)
 
 Patch1:     0001-Honor-CFLAGS-passed-to-cmake.patch
 Patch2:     0002-Fix-core-dumps-with-large-input-on-stdin-rhbz-125727.patch
@@ -81,6 +81,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Mon Mar 20 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.1-14
+- Permit choosing environment modules implementation (#1296383)
+
 * Mon Mar 20 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.1-13
 - Own license directory by runtime (#1206044)
 
