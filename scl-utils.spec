@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    11%{dist}
+Release:    12%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -18,6 +18,7 @@ Requires:   environment-modules
 Patch1:     0001-Honor-CFLAGS-passed-to-cmake.patch
 Patch2:     0002-Fix-core-dumps-with-large-input-on-stdin-rhbz-125727.patch
 Patch3:     0003-Scl-utils-layout-patch-from-fedora-famillecollet.com.patch
+Patch4:     scl-utils-2.0.1-no-repack-jars.patch
 
 %description
 Run-time utility for alternative packaging.
@@ -80,6 +81,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Mon Mar 20 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.1-12
+- Don't try to use no longer existing brp-java-repack-jars script (#1409277)
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.0.1-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
