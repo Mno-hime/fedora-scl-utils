@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    14%{dist}
+Release:    15%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -81,6 +81,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.0.1-15
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Mon Mar 20 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.1-14
 - Permit choosing environment modules implementation (#1296383)
 
