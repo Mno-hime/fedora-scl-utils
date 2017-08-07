@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    16%{dist}
+Release:    17%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -81,6 +81,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Mon Aug  7 2017 Joe Orton <jorton@redhat.com> - 1:2.0.1-17
+- add aarch64, ppc64le to list of arches with lib64 (#1475718)
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.0.1-16
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
