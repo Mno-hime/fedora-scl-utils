@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.1
-Release:    18%{dist}
+Release:    19%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -81,6 +81,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Thu Aug 10 2017 Igor Gnatenko <ignatenko@redhat.com> - 1:2.0.1-19
+- Rebuilt for RPM soname bump
+
 * Thu Aug 10 2017 Igor Gnatenko <ignatenko@redhat.com> - 1:2.0.1-18
 - Rebuilt for RPM soname bump
 
