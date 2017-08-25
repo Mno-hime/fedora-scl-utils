@@ -1,9 +1,9 @@
 %global macrosdir %(d=%{_rpmconfigdir}/macros.d; [ -d $d ] || d=%{_sysconfdir}/rpm; echo $d)
 
 Name:       scl-utils
-Epoch:      2
+Epoch:      1
 Version:    2.0.2
-Release:    1%{dist}
+Release:    2%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
