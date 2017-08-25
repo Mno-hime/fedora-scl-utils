@@ -3,13 +3,13 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.2
-Release:    2%{dist}
+Release:    3%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
 Group:      Applications/File
-URL:        https://fedorahosted.org/SoftwareCollections/
-Source0:    https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.bz2
+URL:        https://github.com/sclorg/scl-utils
+Source0:    https://github.com/sclorg/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:    macros.scl-filesystem
 Buildrequires:  cmake
 Buildrequires:  rpm-devel
@@ -80,6 +80,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Fri Aug 25 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.2-3
+- Fixup URL and Source, fedorahosted.org is no more
+
 * Fri Aug 25 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.2-2
 - scl-utils is not compatible with Lmod, fix the dependency (#1296383)
 
