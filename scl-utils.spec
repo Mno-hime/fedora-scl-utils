@@ -2,8 +2,8 @@
 
 Name:       scl-utils
 Epoch:      1
-Version:    2.0.1
-Release:    20%{dist}
+Version:    2.0.2
+Release:    1%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -15,10 +15,7 @@ Buildrequires:  cmake
 Buildrequires:  rpm-devel
 Requires:   environment(modules)
 
-Patch1:     0001-Honor-CFLAGS-passed-to-cmake.patch
-Patch2:     0002-Fix-core-dumps-with-large-input-on-stdin-rhbz-125727.patch
-Patch3:     0003-Scl-utils-layout-patch-from-fedora-famillecollet.com.patch
-Patch4:     scl-utils-2.0.1-no-repack-jars.patch
+Patch1:     0003-Scl-utils-layout-patch-from-fedora-famillecollet.com.patch
 
 %description
 Run-time utility for alternative packaging.
@@ -63,8 +60,10 @@ rm -rf %buildroot
 %dir %{_sysconfdir}/scl/modulefiles
 %dir %{_sysconfdir}/scl/prefixes
 %{_sysconfdir}/scl/conf
-%config %{_sysconfdir}/bash_completion.d/scl-completion.bash
+%{_sysconfdir}/scl/func_scl.csh
+%config %{_sysconfdir}/bash_completion.d/scl
 %config %{_sysconfdir}/profile.d/scl-init.sh
+%config %{_sysconfdir}/profile.d/scl-init.csh
 %{_bindir}/scl
 %{_bindir}/scl_enabled
 %{_bindir}/scl_source
@@ -81,6 +80,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Fri Aug 25 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.2-1
+- Rebase to 2.0.2
+
 * Fri Aug 11 2017 Igor Gnatenko <ignatenko@redhat.com> - 1:2.0.1-20
 - Rebuilt after RPM update (№ 3)
 
