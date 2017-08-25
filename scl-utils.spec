@@ -1,7 +1,7 @@
 %global macrosdir %(d=%{_rpmconfigdir}/macros.d; [ -d $d ] || d=%{_sysconfdir}/rpm; echo $d)
 
 Name:       scl-utils
-Epoch:      1
+Epoch:      2
 Version:    2.0.2
 Release:    1%{dist}
 Summary:    Utilities for alternative packaging
@@ -13,7 +13,7 @@ Source0:    https://fedorahosted.org/released/scl-utils/%{name}-%{version}.tar.b
 Source1:    macros.scl-filesystem
 Buildrequires:  cmake
 Buildrequires:  rpm-devel
-Requires:   environment(modules)
+Requires:   %{_bindir}/modulecmd
 
 Patch1:     0003-Scl-utils-layout-patch-from-fedora-famillecollet.com.patch
 
@@ -80,6 +80,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Fri Aug 25 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.2-2
+- scl-utils is not compatible with Lmod, fix the dependency (#1296383)
+
 * Fri Aug 25 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.2-1
 - Rebase to 2.0.2
 
