@@ -4,8 +4,6 @@
 %dir %attr(555,root,root) %{_scl_root}
 %dir %attr(555,root,root) %{_scl_scripts}
 %{_scl_scripts}/enable
-%{_scl_scripts}/%{scl}
-%{_root_sysconfdir}/scl/modulefiles/%{scl}
 %{_root_sysconfdir}/scl/prefixes/%scl
 %{_scl_root}/bin
 %attr(555,root,root) %{_scl_root}/boot
@@ -111,7 +109,7 @@ EOF
 cat >> %{buildroot}%{_root_sysconfdir}/scl/prefixes/%{scl} << EOF
 %_scl_prefix
 EOF
-ln -s %{_scl_scripts}/%{scl} %{buildroot}%{_root_sysconfdir}/scl/modulefiles/%{scl}
+test -e %{buildroot}%{_scl_scripts}/%{scl} && ln -s %{_scl_scripts}/%{scl} %{buildroot}%{_root_sysconfdir}/scl/modulefiles/%{scl}
 # filelist
 set +x
 cat >> %{buildroot}/lang-exceptions << EOF

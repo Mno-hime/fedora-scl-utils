@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.2
-Release:    3%{dist}
+Release:    7%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -80,6 +80,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Tue Jul 24 2018 Vít Ondruch <vondruch@redhat.com> - 1:2.0.2-7
+- Don't enforce modulefile ownership.
+
 * Fri Aug 25 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.2-3
 - Fixup URL and Source, fedorahosted.org is no more
 
