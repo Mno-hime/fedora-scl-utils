@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.2
-Release:    5%{dist}
+Release:    7%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -78,6 +78,9 @@ ln -s prefixes conf
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Tue Jul 24 2018 Vít Ondruch <vondruch@redhat.com> - 1:2.0.2-7
+- Don't enforce modulefile ownership.
+
 * Mon Feb 19 2018 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.2-5
 - Explicitly BuildRequire gcc and make
 
