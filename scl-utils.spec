@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.2
-Release:    3%{dist}
+Release:    4%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -80,6 +80,9 @@ rm -rf %buildroot
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.0.2-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Fri Aug 25 2017 Panu Matilainen <pmatilai@redhat.com> - 1:2.0.2-3
 - Fixup URL and Source, fedorahosted.org is no more
 
