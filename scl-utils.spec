@@ -52,9 +52,6 @@ mkdir modulefiles
 mkdir prefixes
 ln -s prefixes conf
 
-%clean
-rm -rf %buildroot
-
 %files
 %defattr(-,root,root,-)
 %dir %{_sysconfdir}/scl/modulefiles
