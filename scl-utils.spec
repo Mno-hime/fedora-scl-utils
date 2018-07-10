@@ -54,7 +54,6 @@ mkdir prefixes
 ln -s prefixes conf
 
 %files
-%defattr(-,root,root,-)
 %dir %{_sysconfdir}/scl/modulefiles
 %dir %{_sysconfdir}/scl/prefixes
 %{_sysconfdir}/scl/conf
@@ -69,7 +68,6 @@ ln -s prefixes conf
 %doc LICENSE
 
 %files build
-%defattr(-,root,root,-)
 %{macrosdir}/macros.scl
 %{_rpmconfigdir}/scldeps.sh
 %{_rpmconfigdir}/fileattrs/scl.attr
