@@ -7,7 +7,6 @@ Release:    7%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
-Group:      Applications/File
 URL:        https://github.com/sclorg/scl-utils
 Source0:    https://github.com/sclorg/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:    macros.scl-filesystem
@@ -23,7 +22,6 @@ Run-time utility for alternative packaging.
 
 %package build
 Summary:    RPM build macros for alternative packaging
-Group:      Applications/File
 Requires:   iso-codes
 Requires:   redhat-rpm-config
 
