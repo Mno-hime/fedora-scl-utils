@@ -32,7 +32,7 @@ Essential RPM build macros for alternative packaging.
 %autosetup -p1
 
 %build
-%cmake
+%cmake .
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
