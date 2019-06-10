@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.2
-Release:    8%{dist}
+Release:    9%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -74,6 +74,9 @@ ln -s prefixes conf
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Mon Jun 10 15:42:05 CET 2019 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 1:2.0.2-9
+- Rebuild for RPM 4.15
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.0.2-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
