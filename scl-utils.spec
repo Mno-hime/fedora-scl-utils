@@ -3,7 +3,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.2
-Release:    12%{dist}
+Release:    13%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -74,6 +74,9 @@ ln -s prefixes conf
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.0.2-13
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Thu Aug 22 2019 Remi Collet <remi@remirepo.net> - 1:2.0.2-12
 - Fix error: macro %%undefine is a built-in #1744583
 
