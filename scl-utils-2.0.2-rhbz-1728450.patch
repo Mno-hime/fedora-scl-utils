@@ -1,0 +1,54 @@
+From 3538686a21279c60c916e82ece02efcd88ae95b9 Mon Sep 17 00:00:00 2001
+From: Joe Orton <jorton@redhat.com>
+Date: Thu, 8 Aug 2019 09:26:00 +0100
+Subject: [PATCH] Fix crashes in "scl list-enabled":
+
+* src/lib_common.c (merge_string_arrays):
+  Ensure elements of returned array are strdup()ed.
+
+* src/scllib.c (get_enabled_collections):
+  Ensure all elements of returned array are strdup()ed.
+
+Ref: https://bugzilla.redhat.com/show_bug.cgi?id=1728450
+---
+ src/lib_common.c | 5 +++++
+ src/scllib.c     | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/src/lib_common.c b/src/lib_common.c
+index 1aa49a0..2e7d116 100644
+--- a/src/lib_common.c
++++ b/src/lib_common.c
+@@ -7,6 +7,7 @@
+ #include <sys/stat.h>
+ #include <unistd.h>
+ #include <wordexp.h>
++#include <assert.h>
+ 
+ #include "errors.h"
+ #include "scllib.h"
+@@ -269,6 +270,10 @@ char **merge_string_arrays(char *const *array1, char *const *array2)
+     }
+     merged_array[++prev] = NULL;
+ 
++    for (int i = 0; i < prev; i++) {
++        merged_array[i] = xstrdup(merged_array[i]);
++    }
++
+     return merged_array;
+ }
+ 
+diff --git a/src/scllib.c b/src/scllib.c
+index ce8df90..3c32d65 100644
+--- a/src/scllib.c
++++ b/src/scllib.c
+@@ -107,8 +107,8 @@ scl_rc get_enabled_collections(char ***_enabled_collections)
+                 sizeof(SCL_MODULES_PATH - 1))){
+ 
+                 enabled_collections[i] += sizeof(SCL_MODULES_PATH);
+-                enabled_collections[i] = xstrdup(enabled_collections[i]);
+             }
++            enabled_collections[i] = xstrdup(enabled_collections[i]);
+         }
+ 
+     }
