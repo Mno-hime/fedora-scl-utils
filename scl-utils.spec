@@ -4,7 +4,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.2
-Release:    14%{dist}
+Release:    15%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -75,6 +75,9 @@ ln -s prefixes conf
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.0.2-15
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Fri Jul 24 2020 Jeff Law <law@redhat.com> - 1:2.0.2-14
 - Use __cmake_in_source_build
 
