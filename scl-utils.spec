@@ -4,7 +4,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.2
-Release:    18%{dist}
+Release:    21%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPLv2+
@@ -20,6 +20,10 @@ Patch1:     0003-Scl-utils-layout-patch-from-fedora-famillecollet.com.patch
 
 # https://github.com/sclorg/scl-utils/pull/25
 Patch100:   scl-utils-2.0.2-rhbz-1728450.patch
+# https://github.com/sclorg/scl-utils/pull/43
+%if 0%{?fedora} >= 35
+Patch101:   scl-utils-2.0.2-rhbz-2029959.patch
+%endif
 
 %description
 Run-time utility for alternative packaging.
