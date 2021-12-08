@@ -13,6 +13,7 @@ Source0:    https://github.com/sclorg/%{name}/archive/%{version}/%{name}-%{versi
 Source1:    macros.scl-filesystem
 BuildRequires:	gcc make
 Buildrequires:  cmake 
+Buildrequires:  libuv
 Buildrequires:  rpm-devel
 Requires:   %{_bindir}/modulecmd
 
