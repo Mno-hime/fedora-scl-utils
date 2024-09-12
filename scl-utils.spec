@@ -4,7 +4,7 @@
 Name:       scl-utils
 Epoch:      1
 Version:    2.0.3
-Release:    3%{dist}
+Release:    4%{dist}
 Summary:    Utilities for alternative packaging
 
 License:    GPL-2.0-or-later
@@ -21,6 +21,7 @@ Patch1:     0003-Scl-utils-layout-patch-from-fedora-famillecollet.com.patch
 Patch2:     BZ-2056462-do-not-error-out-on-SIGINT.patch
 Patch3:     BZ-2091000-remove-tmp-file.patch
 Patch4:     brp-python-hardlink.patch
+Patch5:     rpm-bare-words.patch
 
 %description
 Run-time utility for alternative packaging.
@@ -81,13 +82,16 @@ make check
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
 %changelog
+* Thu Sep 12 2024 Remi Collet <remi@remirepo.net> - 1:2.0.3-4
+- add workaround to "bare words are no longer supported" in RPM 4.20 #2306492
+
 * Sat Jul 20 2024 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.0.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
 
 * Sat Jan 27 2024 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.0.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
 
-* Wed Aug 23 2023 Remi Collet <remi@remirepo/net> - 1:2.0.3-1
+* Wed Aug 23 2023 Remi Collet <remi@remirepo.net> - 1:2.0.3-1
 - Rebase to 2.0.3
 - add upstream patch to fix brp-python-hardlink path
 - use SPDX license ID
