@@ -34,12 +34,16 @@ Requires:   redhat-rpm-config
 %description build
 Essential RPM build macros for alternative packaging.
 
+
 %prep
 %autosetup -p1
+sed -e '/CMAKE_MINIMUM_REQUIRED/s/2.6/3.5/' -i CMakeLists.txt
+
 
 %build
 %cmake
 %cmake_build
+
 
 %install
 %cmake_install
@@ -55,8 +59,10 @@ mkdir modulefiles
 mkdir prefixes
 ln -s prefixes conf
 
+
 %check
 %ctest
+
 
 %files
 %dir %{_sysconfdir}/scl
@@ -81,7 +87,12 @@ ln -s prefixes conf
 %{_rpmconfigdir}/brp-scl-compress
 %{_rpmconfigdir}/brp-scl-python-bytecompile
 
+
 %changelog
+* Fri Feb 13 2026 Remi Collet <remi@remirepo.net> - 1:2.0.3-8
+- raise cmake minimum version to 3.5
+- use arch-agnostic test for packaging /usr/lib64 (Joe Orton, PR #2)
+
 * Thu Feb 12 2026 Cristian Le <git@lecris.dev> - 1:2.0.3-8
 - Allow CMake 4.0 (rhbz#2381440)
 - Use standard cmake macros (rhbz#2381120)
